@@ -4,6 +4,7 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.EditText;
+import android.widget.Toast;
 
 public class MainActivity extends AppCompatActivity {
 
@@ -25,6 +26,20 @@ public class MainActivity extends AppCompatActivity {
             String adsoyad = et_adsoyad.getText().toString();
             String mail = et_mail.getText().toString();
             String adres = et_adres.getText().toString();
+
+            Ogrenci ogrenci = new Ogrenci(adsoyad,mail,adres);
+            Veritabani db = new Veritabani(getApplicationContext());
+            long id=db.KayitEkle(ogrenci);
+            if(id==-1){
+                Toast.makeText(MainActivity.this, "Hay Aksi! Hata oluştu.", Toast.LENGTH_SHORT).show();
+            }else{
+                Toast.makeText(getApplicationContext(), "Kayıt İşlemi Başarılı!", Toast.LENGTH_SHORT).show();
+            }
+
+            et_adsoyad.setText("");
+            et_adres.setText("");
+            et_mail.setText("");
+
             break;
             case R.id.btn_listele:
             break;
