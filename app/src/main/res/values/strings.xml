@@ -1,3 +1,4 @@
 <resources>
     <string name="app_name">Ogrenci Kayit Sistemi</string>
+    <string name="title_activity_listele">Listele</string>
 </resources>

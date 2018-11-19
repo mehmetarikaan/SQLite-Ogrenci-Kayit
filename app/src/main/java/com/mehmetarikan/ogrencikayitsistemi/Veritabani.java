@@ -2,8 +2,12 @@ package com.mehmetarikan.ogrencikayitsistemi;
 
 import android.content.ContentValues;
 import android.content.Context;
+import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+
+import java.util.ArrayList;
+import java.util.List;
 
 
 public class Veritabani extends SQLiteOpenHelper{
@@ -65,5 +69,33 @@ public class Veritabani extends SQLiteOpenHelper{
         return id;
 
     }
+
+    public List<Ogrenci> TumKayitlariGetir() {
+
+        SQLiteDatabase db = getReadableDatabase();
+        String [] sutunlar = new String[]{AD,MAIL,ADRES};
+        Cursor c = db.query(TABLE_NAME,sutunlar,null,null,null,null,null);
+        // Cursor cursor = db.rawQuery("SELECT * FROM"+TABLE_NAME,null);
+
+        int adsirano = c.getColumnIndex(AD);
+        int mailsirano = c.getColumnIndex(MAIL);
+        int adressirano = c.getColumnIndex(ADRES);
+
+        List<Ogrenci> ogrenciList=new ArrayList<Ogrenci>();
+
+        for(c.moveToFirst();!c.isAfterLast();c.moveToNext()){
+
+            Ogrenci ogrenci = new Ogrenci();
+
+            ogrenci.setAdSoyad(c.getString(adsirano));
+            ogrenci.setMail(c.getString(mailsirano));
+            ogrenci.setAdres(c.getString(adressirano));
+
+            ogrenciList.add(ogrenci);
+        }
+        db.close();
+
+        return ogrenciList;
     }
+}
 

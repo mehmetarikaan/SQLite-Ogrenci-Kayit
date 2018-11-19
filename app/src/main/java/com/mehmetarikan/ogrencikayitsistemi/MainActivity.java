@@ -1,5 +1,6 @@
 package com.mehmetarikan.ogrencikayitsistemi;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.view.View;
@@ -42,7 +43,11 @@ public class MainActivity extends AppCompatActivity {
 
             break;
             case R.id.btn_listele:
-            break;
+
+                Intent intent = new Intent(getApplicationContext(),Listele.class);
+                startActivity(intent);
+
+
         }
     }
 
